@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour {
         transform.localScale = theScale;
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
         
         
