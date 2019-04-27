@@ -200,6 +200,21 @@ fn draw_obj<G: Graphics>(
                 &c.draw_state, c.transform, g
             );
         }
+        "invisible_block" => {
+            let line = graphics::Line::new([1.0, 0.0, 0.0, 1.0], 1.0);
+            line.draw([
+                x,
+                y,
+                x + 10.0,
+                y + 10.0
+            ], &c.draw_state, c.transform, g);
+            line.draw([
+                x,
+                y + 10.0,
+                x + 10.0,
+                y
+            ], &c.draw_state, c.transform, g);
+        }
         _ => {}
     }
 }
@@ -247,27 +262,3 @@ fn draw_state<G: Graphics>(
         ],
         &c.draw_state, c.transform, g);
 }
-
-/* fn draw_axis_values<W: Window, G: Graphics>(
-    axis_values: &mut AxisValues,
-    window: &W,
-    c: &Context,
-    g: &mut G
-) {
-    let window_height = window.size().height as f64;
-    let max_axis_height = 200.0;
-    let offset = 10.0;
-    let top = window_height - (max_axis_height + offset);
-    let color = [1.0, 0.0, 0.0, 1.0];
-    let width = 10.0;
-    let mut draw = |i, v: f64| {
-        let i = i as f64;
-        let height = (v + 1.0) / 2.0 * max_axis_height;
-        let rect = [offset + i * (width + offset),
-            top + max_axis_height - height, width, height];
-        graphics::rectangle(color, rect, c.transform, g);
-    };
-    for (i, &v) in axis_values.values().enumerate() {
-        draw(i, v);
-    }
-}*/
