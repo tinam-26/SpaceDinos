@@ -16,10 +16,13 @@ public class PlayerController : MonoBehaviour {
     private Animator anim;
     private Rigidbody2D rb2d;
 
+    public int playerCoin; 
 
     // Use this for initialization
     void Awake ()
     {
+        Debug.Log("HEELLOOOOOOOOOO");
+
         anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
     }
@@ -68,5 +71,19 @@ public class PlayerController : MonoBehaviour {
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        Debug.Log("Colliiiddeeeeeeee");
+        if (col.gameObject.CompareTag("coin"))
+        {
+            Debug.Log("Coin");
+            col.gameObject.SetActive(false);
+            playerCoin++;
+        } else if (col.gameObject.CompareTag("spikeyBoi")) {
+            Debug.Log("SpikeyBoi");
+            col.gameObject.SetActive(false);
+        }
     }
 }
