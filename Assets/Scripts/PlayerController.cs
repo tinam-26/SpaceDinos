@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour {
     // Use this for initialization
     void Awake ()
     {
-        Debug.Log("HEELLOOOOOOOOOO");
+        //Debug.Log("HEELLOOOOOOOOOO");
 
         anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
@@ -75,7 +75,8 @@ public class PlayerController : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("Colliiiddeeeeeeee");
+        
+        
         if (col.gameObject.CompareTag("coin"))
         {
             Debug.Log("Coin");
@@ -83,7 +84,7 @@ public class PlayerController : MonoBehaviour {
             playerCoin++;
         } else if (col.gameObject.CompareTag("spikeyBoi")) {
             Debug.Log("SpikeyBoi");
-            col.gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
         }
     }
 }
