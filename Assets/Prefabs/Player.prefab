@@ -84,7 +84,7 @@ MonoBehaviour:
   maxSpeed: 8
   jumpForce: 800
   airSpeedModifier: 0.05
-  groundFriction: 0.6
+  groundFriction: 1
   groundCheck: {fileID: 5139586067702084133}
 --- !u!50 &5139586068403327253
 Rigidbody2D:

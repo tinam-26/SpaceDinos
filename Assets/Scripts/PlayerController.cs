@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
 
 
     // Use this for initialization
-    void Awake () 
+    void Awake ()
     {
         anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
