@@ -16,7 +16,7 @@ public class finalSceneController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
+            SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
         }
     }
 }

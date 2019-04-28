@@ -17,7 +17,7 @@ public class ObjectSpawner : MonoBehaviour
         } catch (FileNotFoundException e) {
             // If level doesn't exist (last level just beaten)
             level = 1;
-            SceneManager.LoadScene("introScene", LoadSceneMode.Single); //TODO: Change to menu scene
+            SceneManager.LoadScene("menuScene", LoadSceneMode.Single); //TODO: Change to menu scene
         } 
     }
 
