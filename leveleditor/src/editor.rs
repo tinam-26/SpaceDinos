@@ -120,6 +120,22 @@ pub fn editor(level: Level) {
                         state.rect_mode = !state.rect_mode;
                     }
                 }
+                Key::T => {
+                    if !state.line_mode {
+                        if !state.rect_mode {
+                            state.line[0] = state.cursor[0];
+                            state.line[1] = state.cursor[1];
+                        } else {
+                            // Apply rect
+                            for x in min(state.cursor[0], state.line[0])..=max(state.cursor[0], state.line[0]) {
+                                for y in min(state.cursor[1], state.line[1])..=max(state.cursor[1], state.line[1]) {
+                                    state.level.get_at_pos(x, y);
+                                }
+                            }
+                        }
+                        state.rect_mode = !state.rect_mode;
+                    }
+                }
                 Key::L => {
                     if !state.rect_mode {
                         if !state.line_mode {
