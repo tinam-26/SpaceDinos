@@ -36,14 +36,12 @@ public class PlayerController : MonoBehaviour {
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
         if(grounded && !oldGround)
-        {
             anim.speed = prevSpeed;
-        }
+        
 
         if (Input.GetButtonDown("Jump") && grounded)
-        {
             jump = true;
-        }
+        
 
         if (Input.GetKeyDown(KeyCode.Return)) {
             ObjectSpawner.level++;
@@ -56,6 +54,11 @@ public class PlayerController : MonoBehaviour {
         float h = Input.GetAxis("Horizontal");
 
         anim.SetFloat("Speed", Mathf.Abs(h));
+        if (grounded) 
+            anim.speed = Mathf.Abs(rb2d.velocity.x) / maxSpeed;
+
+        if (Mathf.Abs(rb2d.velocity.x) < 0.1)
+            anim.playbackTime = 5.01f;
 
         if (h * rb2d.velocity.x < maxSpeed)
             rb2d.AddForce(Vector2.right * h * moveForce * (grounded ? 1.0f : airSpeedModifier));
@@ -75,7 +78,6 @@ public class PlayerController : MonoBehaviour {
             anim.SetTrigger("Jump");
             rb2d.AddForce(new Vector2(0f, jumpForce));
 
-            Debug.Log("isJump");
             prevSpeed = anim.speed;
             anim.speed = 0f;
 
@@ -98,11 +100,9 @@ public class PlayerController : MonoBehaviour {
         
         if (col.gameObject.CompareTag("coin"))
         {
-            Debug.Log("Coin");
             col.gameObject.SetActive(false);
             playerCoin++;
         } else if (col.gameObject.CompareTag("spikeyBoi")) {
-            Debug.Log("SpikeyBoi");
             this.gameObject.SetActive(false);
         }
     }
