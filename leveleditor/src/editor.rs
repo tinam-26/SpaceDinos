@@ -70,6 +70,17 @@ pub fn editor(level: Level) {
                         state.level.save(file_path).ok();
                     }
                 }
+                Key::F => {
+                    state.level.get_at_pos(state.cursor[0], state.cursor[1]);
+                    state.level.levelObjects.push(
+                        LevelObject {
+                            name: "floor".to_string(),
+                            x: state.cursor[0],
+                            y: state.cursor[1]
+                        }
+                    );
+                    state.cursor[0] += 25;
+                }
                 Key::L => {
                     if !state.line_mode {
                         state.line[0] = state.cursor[0];
@@ -214,6 +225,19 @@ fn draw_obj<G: Graphics>(
                 x + 10.0,
                 y
             ], &c.draw_state, c.transform, g);
+        }
+        "floor" => {
+            graphics::Rectangle::new(
+                [0.3, 0.3, 0.3, 1.0]
+            ).draw(
+                [
+                    x,
+                    y,
+                    250.0,
+                    20.0
+                ],
+                &c.draw_state, c.transform, g
+            );
         }
         _ => {}
     }
