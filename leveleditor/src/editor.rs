@@ -70,6 +70,15 @@ pub fn editor(level: Level) {
                         state.level.save(file_path).ok();
                     }
                 }
+                Key::O => {
+                    let result = nfd::open_file_dialog(Some("json"), None).unwrap_or_else(|e| {
+                        panic!(e);
+                    });
+
+                    if let nfd::Response::Okay(file_path) = result {
+                        state.level = Level::open(file_path).unwrap_or_default();
+                    }
+                }
                 Key::F => {
                     state.level.get_at_pos(state.cursor[0], state.cursor[1]);
                     state.level.levelObjects.push(
