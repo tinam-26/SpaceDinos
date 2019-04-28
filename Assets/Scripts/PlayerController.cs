@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
-
     [HideInInspector] public bool facingRight = true;
     [HideInInspector] public bool jump = false;
     public float moveForce = 365f;
@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour {
     private Animator anim;
     private Rigidbody2D rb2d;
 
-    public int playerCoin; 
+    public int playerCoin;
 
     // Use this for initialization
     void Awake ()
@@ -35,6 +35,11 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetButtonDown("Jump") && grounded)
         {
             jump = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return)) {
+            ObjectSpawner.level++;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 

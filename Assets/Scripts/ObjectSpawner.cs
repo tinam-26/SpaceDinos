@@ -5,10 +5,12 @@ using System.IO;
 
 public class ObjectSpawner : MonoBehaviour
 {
+    public static uint level = 1;
+
     // Start is called before the first frame update
     void Start()
     {
-        SpawnFromJson(System.IO.File.ReadAllText($"{Application.streamingAssetsPath}/levels/1.json"));
+        SpawnFromJson(System.IO.File.ReadAllText($"{Application.streamingAssetsPath}/levels/{level}.json"));
     }
 
     // Update is called once per frame
