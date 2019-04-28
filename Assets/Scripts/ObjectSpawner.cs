@@ -11,11 +11,14 @@ public class ObjectSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(level == 3){
+        try {
+            // Read level data from file
+            SpawnFromJson(System.IO.File.ReadAllText($"{Application.streamingAssetsPath}/levels/{level}.json"));
+        } catch (FileNotFoundException e) {
+            // If level doesn't exist (last level just beaten)
             level = 1;
             SceneManager.LoadScene("introScene", LoadSceneMode.Single); //TODO: Change to menu scene
-        }
-        SpawnFromJson(System.IO.File.ReadAllText($"{Application.streamingAssetsPath}/levels/{level}.json"));
+        } 
     }
 
     // Update is called once per frame
@@ -33,6 +36,7 @@ public class ObjectSpawner : MonoBehaviour
         }
     }
 }
+
 [System.Serializable]
 public class LevelObject
 {

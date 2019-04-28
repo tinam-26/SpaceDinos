@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour {
     public float jumpForce = 1000f;
     public float airSpeedModifier = 1.0f;
     public float groundFriction = 0.5f;
-    public Transform groundCheck;
+    public Transform groundCheckLeft;
+    public Transform groundCheckRight;
 
     private bool grounded = false;
     public Animator anim;
@@ -35,7 +36,8 @@ public class PlayerController : MonoBehaviour {
     {
         bool oldGround = grounded;
 
-        grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+        grounded = Physics2D.Linecast(transform.position, groundCheckLeft.position, 1 << LayerMask.NameToLayer("Ground")) |
+                    Physics2D.Linecast(transform.position, groundCheckRight.position, 1 << LayerMask.NameToLayer("Ground"));
 
         if(grounded && !oldGround)
             anim.speed = prevSpeed;
