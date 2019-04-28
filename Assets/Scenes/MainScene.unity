@@ -193,7 +193,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 467743694}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.32706833, y: 0.037561204, z: 10}
+  m_LocalPosition: {x: 0.32706833, y: 0.037561204, z: 11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2145792056}
@@ -505,6 +505,56 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1727899966809778984, guid: d26438c03cfd4ec4d915f11045944206,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1727899966809778988, guid: d26438c03cfd4ec4d915f11045944206,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1727899966809778988, guid: d26438c03cfd4ec4d915f11045944206,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1727899966809778988, guid: d26438c03cfd4ec4d915f11045944206,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1727899966809778988, guid: d26438c03cfd4ec4d915f11045944206,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1727899966809778985, guid: d26438c03cfd4ec4d915f11045944206,
+        type: 3}
+      propertyPath: coinText
+      value: 
+      objectReference: {fileID: 2069759375}
+    - target: {fileID: 1727899966809778985, guid: d26438c03cfd4ec4d915f11045944206,
+        type: 3}
+      propertyPath: groundFriction
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1727899966809778990, guid: d26438c03cfd4ec4d915f11045944206,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1727899965777676625, guid: d26438c03cfd4ec4d915f11045944206,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1727899965777676625, guid: d26438c03cfd4ec4d915f11045944206,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5139586068403327259, guid: d26438c03cfd4ec4d915f11045944206,
         type: 3}
       propertyPath: m_Name
@@ -559,56 +609,6 @@ PrefabInstance:
         type: 3}
       propertyPath: moveForce
       value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 1727899966809778984, guid: d26438c03cfd4ec4d915f11045944206,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1727899966809778985, guid: d26438c03cfd4ec4d915f11045944206,
-        type: 3}
-      propertyPath: coinText
-      value: 
-      objectReference: {fileID: 2069759375}
-    - target: {fileID: 1727899966809778985, guid: d26438c03cfd4ec4d915f11045944206,
-        type: 3}
-      propertyPath: groundFriction
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1727899966809778990, guid: d26438c03cfd4ec4d915f11045944206,
-        type: 3}
-      propertyPath: m_GravityScale
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1727899966809778988, guid: d26438c03cfd4ec4d915f11045944206,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1727899966809778988, guid: d26438c03cfd4ec4d915f11045944206,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1727899966809778988, guid: d26438c03cfd4ec4d915f11045944206,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1727899966809778988, guid: d26438c03cfd4ec4d915f11045944206,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1727899965777676625, guid: d26438c03cfd4ec4d915f11045944206,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1727899965777676625, guid: d26438c03cfd4ec4d915f11045944206,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d26438c03cfd4ec4d915f11045944206, type: 3}
