@@ -8,7 +8,7 @@ public class ObjectSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpawnFromJson(System.IO.File.ReadAllText(@"C:\Programming\dino\SpaceDinos\leveleditor\test3.json"));
+        SpawnFromJson(System.IO.File.ReadAllText($"{Application.streamingAssetsPath}/levels/1.json"));
     }
 
     // Update is called once per frame
