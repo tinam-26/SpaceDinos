@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     [HideInInspector] public bool facingRight = true;
@@ -15,7 +16,7 @@ public class PlayerController : MonoBehaviour {
     private bool grounded = false;
     public Animator anim;
     private Rigidbody2D rb2d;
-
+    public Text coinText;
     public int playerCoin;
 
     private float prevSpeed = 1.0f;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour {
         //Debug.Log("HEELLOOOOOOOOOO");
         anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
+        //coinText = GetComponent<Text>();
     }
     
     // Update is called once per frame
@@ -96,15 +98,16 @@ public class PlayerController : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D col)
     {
         
-        
         if (col.gameObject.CompareTag("coin"))
         {
             Debug.Log("Coin");
             col.gameObject.SetActive(false);
             playerCoin++;
+            coinText.text = "Coins: " + playerCoin;
         } else if (col.gameObject.CompareTag("spikeyBoi")) {
             Debug.Log("SpikeyBoi");
             this.gameObject.SetActive(false);
+
         }
     }
 }
