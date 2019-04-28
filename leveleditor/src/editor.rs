@@ -168,7 +168,7 @@ pub fn editor(level: Level) {
                                 let mut y = y0 as isize;
                                 for x in x0 as isize..=x1 as isize {
                                     // Delete anything in its path
-                                    state.level.get_at_pos(state.cursor[0], y);
+                                    state.level.get_at_pos(x, y);
                                     // Add block at x,
                                     state.level.levelObjects.push(
                                         LevelObject {
