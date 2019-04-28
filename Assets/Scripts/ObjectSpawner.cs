@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class ObjectSpawner : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
-        SpawnFromJson(@"{""levelObjects"": [{""name"": ""coin"", ""x"": -3, ""y"": -1},    {""name"": ""platform"", ""x"": 7, ""y"": -2}]}");
+        SpawnFromJson(System.IO.File.ReadAllText(@"C:\Programming\dino\SpaceDinos\leveleditor\test3.json"));
     }
 
     // Update is called once per frame
