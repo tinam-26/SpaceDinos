@@ -82,8 +82,8 @@ pub fn editor(level: Level) {
                     }
                 }
                 Key::F => {
-                    for x in state.cursor[0]..state.cursor[1]+25 {
-                        for y in state.cursor[1]..state.cursor[1]+2 {
+                    for x in state.cursor[0]..state.cursor[0]+25 {
+                        for y in state.cursor[1]-1..=state.cursor[1] {
                             state.level.get_at_pos(x, y);
                         }
                     }

@@ -6,6 +6,9 @@
 * **Spacebar** - Cycle current block
 * **F** - Place floor
 * **L** - Line Tool
+* **K** - Line Delete Tool
+* **R** - Rectangle Tool
+* **T** - Rectangle Delete Tool
 * **Delete/Backspace** - Delete current block
 * **Escape** - Quit
 
