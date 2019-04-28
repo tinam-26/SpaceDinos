@@ -5,7 +5,7 @@ using System.IO;
 
 public class ObjectSpawner : MonoBehaviour
 {
-    public static uint level;
+    public static uint level = 1;
 
     // Start is called before the first frame update
     void Start()
