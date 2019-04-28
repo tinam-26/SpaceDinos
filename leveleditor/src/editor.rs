@@ -21,6 +21,7 @@ struct State {
     level: Level,
     cursor: [isize; 2],
     line_mode: bool,
+    rect_mode: bool,
     line: [isize; 2],
 }
 
@@ -29,6 +30,7 @@ pub fn editor(level: Level) {
         level,
         cursor: [0, 0],
         line_mode: false,
+        rect_mode: false,
         line: [0, 0]
     };
     let opengl = OpenGL::V3_2;
@@ -80,7 +82,12 @@ pub fn editor(level: Level) {
                     }
                 }
                 Key::F => {
-                    state.level.get_at_pos(state.cursor[0], state.cursor[1]);
+                    for x in state.cursor[0]..state.cursor[1]+25 {
+                        for y in state.cursor[1]..state.cursor[1]+2 {
+                            state.level.get_at_pos(x, y);
+                        }
+                    }
+                    
                     state.level.levelObjects.push(
                         LevelObject {
                             name: "floor".to_string(),
@@ -90,55 +97,80 @@ pub fn editor(level: Level) {
                     );
                     state.cursor[0] += 25;
                 }
-                Key::L => {
+                Key::R => {
                     if !state.line_mode {
-                        state.line[0] = state.cursor[0];
-                        state.line[1] = state.cursor[1];
-                    } else {
-                        // Apply line
-                        if state.cursor[0] == state.line[0] {
-                            for y in min(state.cursor[1], state.line[1])..=max(state.cursor[1], state.line[1]) {
-                                // Delete anything in its path
-                                state.level.get_at_pos(state.cursor[0], y);
-                                state.level.levelObjects.push(
-                                    LevelObject {
-                                        name: "block".to_string(),
-                                        x: state.cursor[0],
-                                        y,
-                                    }
-                                );
-                            }
+                        if !state.rect_mode {
+                            state.line[0] = state.cursor[0];
+                            state.line[1] = state.cursor[1];
                         } else {
-                            let (x0, y0, x1, y1) = if state.line[0] > state.cursor[0] {
-                                (state.cursor[0] as f64, state.cursor[1] as f64, state.line[0] as f64, state.line[1] as f64)
-                            } else {
-                                (state.line[0] as f64, state.line[1] as f64, state.cursor[0] as f64, state.cursor[1] as f64)
-                            };
-                            let deltax = x1 - x0;
-                            let deltay = y1 - y0;
-                            let deltaerr = (deltay / deltax).abs();
-                            let mut error = 0.0;
-                            let mut y = y0 as isize;
-                            for x in x0 as isize..=x1 as isize {
-                                // Delete anything in its path
-                                state.level.get_at_pos(state.cursor[0], y);
-                                // Add block at x,
-                                state.level.levelObjects.push(
-                                    LevelObject {
-                                        name: "block".to_string(),
-                                        x,
-                                        y,
-                                    }
-                                );
-                                error += deltaerr as f64;
-                                if error >= 0.5 {
-                                    y = y + deltay.signum() as isize;
-                                    error -= 1.0;
+                            // Apply rect
+                            for x in min(state.cursor[0], state.line[0])..=max(state.cursor[0], state.line[0]) {
+                                for y in min(state.cursor[1], state.line[1])..=max(state.cursor[1], state.line[1]) {
+                                    state.level.get_at_pos(x, y);
+                                    state.level.levelObjects.push(
+                                        LevelObject {
+                                            name: "block".to_string(),
+                                            x,
+                                            y,
+                                        }
+                                    );
                                 }
                             }
                         }
+                        state.rect_mode = !state.rect_mode;
                     }
-                    state.line_mode = !state.line_mode;
+                }
+                Key::L => {
+                    if !state.rect_mode {
+                        if !state.line_mode {
+                            state.line[0] = state.cursor[0];
+                            state.line[1] = state.cursor[1];
+                        } else {
+                            // Apply line
+                            if state.cursor[0] == state.line[0] {
+                                for y in min(state.cursor[1], state.line[1])..=max(state.cursor[1], state.line[1]) {
+                                    // Delete anything in its path
+                                    state.level.get_at_pos(state.cursor[0], y);
+                                    state.level.levelObjects.push(
+                                        LevelObject {
+                                            name: "block".to_string(),
+                                            x: state.cursor[0],
+                                            y,
+                                        }
+                                    );
+                                }
+                            } else {
+                                let (x0, y0, x1, y1) = if state.line[0] > state.cursor[0] {
+                                    (state.cursor[0] as f64, state.cursor[1] as f64, state.line[0] as f64, state.line[1] as f64)
+                                } else {
+                                    (state.line[0] as f64, state.line[1] as f64, state.cursor[0] as f64, state.cursor[1] as f64)
+                                };
+                                let deltax = x1 - x0;
+                                let deltay = y1 - y0;
+                                let deltaerr = (deltay / deltax).abs();
+                                let mut error = 0.0;
+                                let mut y = y0 as isize;
+                                for x in x0 as isize..=x1 as isize {
+                                    // Delete anything in its path
+                                    state.level.get_at_pos(state.cursor[0], y);
+                                    // Add block at x,
+                                    state.level.levelObjects.push(
+                                        LevelObject {
+                                            name: "block".to_string(),
+                                            x,
+                                            y,
+                                        }
+                                    );
+                                    error += deltaerr as f64;
+                                    if error >= 0.5 {
+                                        y = y + deltay.signum() as isize;
+                                        error -= 1.0;
+                                    }
+                                }
+                            }
+                        }
+                        state.line_mode = !state.line_mode;
+                    }
                 }
                 Key::K => {
                     if !state.line_mode {
@@ -338,12 +370,31 @@ fn draw_state<G: Graphics>(
         ], &c.draw_state, c.transform, g);
     }
 
+    // Draw rect if applicable
+    if state.rect_mode {
+        let line_start_x = state.line[0] as f64 * 10.0;
+        let line_start_y = state.line[1] as f64 * -10.0 + center; 
+        
+        let rect_left = f64::min(line_start_x + 5.0, cursor_pos.0 + 5.0);
+        let rect_width = ((line_start_x + 5.0) - (cursor_pos.0 + 5.0)).abs();
+        let rect_top = f64::min(line_start_y + 5.0, cursor_pos.1 + 5.0);
+        let rect_height = ((line_start_y + 5.0) - (cursor_pos.1 + 5.0)).abs();
+
+        let rect = graphics::Rectangle::new_border([1.0, 0.0, 0.0, 1.0], 1.0);
+        rect.draw([
+            rect_left,
+            rect_top,
+            rect_width,
+            rect_height
+        ], &c.draw_state, c.transform, g);
+    }
+
     // Draw cursor
     rect_border.draw([
-            cursor_pos.0,
-            cursor_pos.1,
-            10.0,
-            10.0
-        ],
-        &c.draw_state, c.transform, g);
+        cursor_pos.0,
+        cursor_pos.1,
+        10.0,
+        10.0
+    ],
+    &c.draw_state, c.transform, g);
 }
