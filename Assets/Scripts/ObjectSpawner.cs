@@ -11,8 +11,10 @@ public class ObjectSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(level == 3)
-        SceneManager.LoadScene("introScene", LoadSceneMode.Single);
+        if(level == 3){
+            level = 1;
+            SceneManager.LoadScene("introScene", LoadSceneMode.Single);
+        }
         SpawnFromJson(System.IO.File.ReadAllText($"{Application.streamingAssetsPath}/levels/{level}.json"));
     }
 
