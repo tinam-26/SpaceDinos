@@ -239,6 +239,23 @@ fn draw_obj<G: Graphics>(
                 &c.draw_state, c.transform, g
             );
         }
+        "finish_block" => {
+            let rect = graphics::Rectangle::new([0.0, 0.0, 0.0, 1.0]);
+            for i in 0..4 {
+                for j in 0..4 {
+                    if (i + j) % 2 == 0 {
+                        rect.draw(
+                            [
+                                x + (10.0 / 4.0) * i as f64,
+                                y + (10.0 / 4.0) * j as f64,
+                                10.0 / 4.0,
+                                10.0 / 4.0,                            
+                            ], &c.draw_state, c.transform, g
+                        );
+                    }
+                }
+            }
+        }
         _ => {}
     }
 }
