@@ -44,8 +44,7 @@ public class PlayerController : MonoBehaviour {
         
 
         if (Input.GetKeyDown(KeyCode.Return)) {
-            ObjectSpawner.level++;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            NextLevel();
         }
     }
 
@@ -94,16 +93,22 @@ public class PlayerController : MonoBehaviour {
         transform.localScale = theScale;
     }
 
+    void NextLevel()
+    {
+        ObjectSpawner.level++;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
-        
-        
         if (col.gameObject.CompareTag("coin"))
         {
             col.gameObject.SetActive(false);
             playerCoin++;
         } else if (col.gameObject.CompareTag("spikeyBoi")) {
             this.gameObject.SetActive(false);
+        } else if (col.gameObject.CompareTag("Finish")) {
+            NextLevel();
         }
     }
 }
