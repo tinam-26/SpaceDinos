@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class menuScript : MonoBehaviour { 
-    
+public class menuScript : MonoBehaviour {
+    public uint levelNum;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,12 +15,14 @@ public class menuScript : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("clicked");
-            SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
-        }
+        
     }
 
+    void OnMouseDown()
+    {
+        Debug.Log("clicked");
+        ObjectSpawner.level = levelNum;
+        SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
+    }
    
 }

@@ -17,6 +17,7 @@ public class menuScript2 : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("clicked");
+            ObjectSpawner.level = 2;
             SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
         }
     }
