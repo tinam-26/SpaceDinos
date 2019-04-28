@@ -19,7 +19,7 @@ const OBJECT_TYPES: &'static [&'static str] = &[
     "platform",
     "coin",
     "spikes",
-    "invisible_block",
+    "invisible_block"
 ];
 
 fn find_obj_type_index(search_name: &str) -> Option<usize> {

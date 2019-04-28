@@ -20,5 +20,9 @@ public class ScrollController : MonoBehaviour
         if(Mathf.Abs(player.transform.position.x - transform.position.x) > camWidth * screenDeadzonePercent) {
             transform.position += (Vector3.right * (Mathf.Sign(player.transform.position.x - transform.position.x) *  (Mathf.Abs(player.transform.position.x - transform.position.x) - (camWidth * screenDeadzonePercent))));
         }
+        float camHeight = Camera.main.orthographicSize;
+        if(Mathf.Abs(player.transform.position.y - transform.position.y) > camHeight * screenDeadzonePercent) {
+            transform.position += (Vector3.up * (Mathf.Sign(player.transform.position.y - transform.position.y) *  (Mathf.Abs(player.transform.position.y - transform.position.y) - (camHeight * screenDeadzonePercent))));
+        }
     }
 }

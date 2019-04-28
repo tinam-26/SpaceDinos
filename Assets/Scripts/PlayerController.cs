@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour {
 
     private float prevSpeed = 1.0f;
 
-
     // Use this for initialization
     void Awake ()
     {
@@ -30,7 +29,7 @@ public class PlayerController : MonoBehaviour {
     }
     
     // Update is called once per frame
-    void Update () 
+    void Update ()
     {
         bool oldGround = grounded;
 
