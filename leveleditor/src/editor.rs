@@ -34,7 +34,7 @@ pub fn editor(level: Level) {
         line: [0, 0]
     };
     let opengl = OpenGL::V3_2;
-    let mut window: AppWindow = WindowSettings::new("piston-example-user_input", [600, 600])
+    let mut window: AppWindow = WindowSettings::new("Space Dinos Level Editor", [600, 600])
         .exit_on_esc(true).opengl(opengl).build().unwrap();
 
     let ref mut gl = GlGraphics::new(opengl);
