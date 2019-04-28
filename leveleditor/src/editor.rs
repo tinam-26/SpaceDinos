@@ -140,6 +140,41 @@ pub fn editor(level: Level) {
                     }
                     state.line_mode = !state.line_mode;
                 }
+                Key::K => {
+                    if !state.line_mode {
+                        state.line[0] = state.cursor[0];
+                        state.line[1] = state.cursor[1];
+                    } else {
+                        // Apply line
+                        if state.cursor[0] == state.line[0] {
+                            for y in min(state.cursor[1], state.line[1])..=max(state.cursor[1], state.line[1]) {
+                                // Delete anything in its path
+                                state.level.get_at_pos(state.cursor[0], y);
+                            }
+                        } else {
+                            let (x0, y0, x1, y1) = if state.line[0] > state.cursor[0] {
+                                (state.cursor[0] as f64, state.cursor[1] as f64, state.line[0] as f64, state.line[1] as f64)
+                            } else {
+                                (state.line[0] as f64, state.line[1] as f64, state.cursor[0] as f64, state.cursor[1] as f64)
+                            };
+                            let deltax = x1 - x0;
+                            let deltay = y1 - y0;
+                            let deltaerr = (deltay / deltax).abs();
+                            let mut error = 0.0;
+                            let mut y = y0 as isize;
+                            for x in x0 as isize..=x1 as isize {
+                                // Delete anything in its path
+                                state.level.get_at_pos(x, y);
+                                error += deltaerr as f64;
+                                if error >= 0.5 {
+                                    y = y + deltay.signum() as isize;
+                                    error -= 1.0;
+                                }
+                            }
+                        }
+                    }
+                    state.line_mode = !state.line_mode;
+                }
                 Key::Escape => {
                     state.line_mode = false;
                 }
