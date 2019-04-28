@@ -13,10 +13,11 @@ public class PlayerController : MonoBehaviour {
     public Transform groundCheck;
 
     private bool grounded = false;
-    private Animator anim;
+    public Animator anim;
     private Rigidbody2D rb2d;
 
-    public int playerCoin; 
+    public int playerCoin;
+    private float prevSpeed;
 
     // Use this for initialization
     void Awake ()
@@ -30,7 +31,14 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update () 
     {
+        bool oldGround = grounded;
+
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+
+        if(grounded && !oldGround)
+        {
+            anim.speed = prevSpeed;
+        }
 
         if (Input.GetButtonDown("Jump") && grounded)
         {
@@ -61,8 +69,14 @@ public class PlayerController : MonoBehaviour {
         {
             anim.SetTrigger("Jump");
             rb2d.AddForce(new Vector2(0f, jumpForce));
+
+            Debug.Log("isJump");
+            prevSpeed = anim.speed;
+            anim.speed = 0f;
+
             jump = false;
         }
+        
     }
 
     void Flip()
