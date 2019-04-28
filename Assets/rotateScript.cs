@@ -16,7 +16,7 @@ public class rotateScript : MonoBehaviour
     void Update()
     {
         //rotate on z axis
-        //self.transform.position = new Vector3(0.75f, 0.0f, 0.0f);
+        self.transform.position = new Vector3(0.75f, 0.0f, 0.0f);
         self.transform.Rotate(xAngle, yAngle, zAngle, Space.Self);
     }
 }
