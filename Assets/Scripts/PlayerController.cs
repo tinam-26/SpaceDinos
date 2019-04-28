@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour {
             col.gameObject.SetActive(false);
             playerCoin++;
         } else if (col.gameObject.CompareTag("spikeyBoi")) {
-            this.gameObject.SetActive(false);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         } else if (col.gameObject.CompareTag("Finish")) {
             NextLevel();
         }
