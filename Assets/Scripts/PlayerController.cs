@@ -18,14 +18,13 @@ public class PlayerController : MonoBehaviour {
 
     public int playerCoin;
 
-    private float prevSpeed;
+    private float prevSpeed = 1.0f;
 
 
     // Use this for initialization
     void Awake ()
     {
         //Debug.Log("HEELLOOOOOOOOOO");
-
         anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
     }
