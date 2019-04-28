@@ -13,7 +13,7 @@ public class ObjectSpawner : MonoBehaviour
     {
         if(level == 3){
             level = 1;
-            SceneManager.LoadScene("introScene", LoadSceneMode.Single);
+            SceneManager.LoadScene("introScene", LoadSceneMode.Single); //TODO: Change to menu scene
         }
         SpawnFromJson(System.IO.File.ReadAllText($"{Application.streamingAssetsPath}/levels/{level}.json"));
     }
